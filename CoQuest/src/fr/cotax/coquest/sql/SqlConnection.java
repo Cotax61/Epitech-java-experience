@@ -39,6 +39,10 @@ public class SqlConnection {
 		}
 	}
 	
+	public Connection GetConnection() {
+		return (this.connection);
+	}
+	
 	public boolean isConnected() {
 		return connection != null;
 	}
