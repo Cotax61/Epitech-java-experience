@@ -7,19 +7,36 @@ import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import fr.cotax.coquest.list.FifthQuestList;
+import fr.cotax.coquest.list.FirstQuestList;
+import fr.cotax.coquest.list.FourthQuestList;
+import fr.cotax.coquest.list.SecondQuestList;
+import fr.cotax.coquest.list.ThirdQuestList;
 import fr.cotax.coquest.sql.SqlQuestUtilities;
 
 public class QuestCommand implements CommandExecutor {
 
 	public SqlQuestUtilities util;
+	private FirstQuestList first;
+	private SecondQuestList second;
+	private ThirdQuestList third;
+	private FourthQuestList fourth;
+	private FifthQuestList fifth;
 
 	public QuestCommand(SqlQuestUtilities util) {
 		this.util = util;
+		first = new FirstQuestList(util);
+//   	second = new SecondQuestList(util);
+//		third = new ThirdQuestList(util);
+//		fourth = new FourthQuestList(util);
+//		fifth = new FifthQuestList(util);
 	}
 	
 	public ItemMeta setDefaultMessage(ItemMeta meta)
@@ -37,11 +54,14 @@ public class QuestCommand implements CommandExecutor {
 		
 		if (player_quest == 0) {
 			meta = setDefaultMessage(meta);
-			item.setItemMeta(meta);
-			return (item);
 		} else {
-			meta = 
+			meta.setDisplayName(first.getQuestName(util.get_quest_id(player, quest_id)));
+			meta.setLore(first.getQuestLore(player, util.get_quest_id(player, quest_id)));
+			item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
+			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		}
+		item.setItemMeta(meta);
+		return item;
 	}
 	
 	@Override
