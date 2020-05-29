@@ -20,6 +20,7 @@ public class main extends JavaPlugin implements Listener {
 		sql.connection();
 		connect = sql.GetConnection();
 		sql_util = new SqlQuestUtilities(this.connect);
+		getCommand("quest").setExecutor(new QuestCommand(sql_util));
 		getServer().getPluginManager().registerEvents(new QuestListeners(this, sql_util), this);
 	}
 	
