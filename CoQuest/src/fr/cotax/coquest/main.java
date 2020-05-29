@@ -2,6 +2,7 @@ package fr.cotax.coquest;
 
 import java.sql.Connection;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,21 +24,12 @@ public class main extends JavaPlugin implements Listener {
 		sql.connection();
 		connect = sql.GetConnection();
 		sql_util = new SqlQuestUtilities(this.connect);
-		getServer().getPluginManager().registerEvents(this, this);
-//		getServer().getPluginManager().registerEvents(new PlayerListeners(), this);
+		getServer().getPluginManager().registerEvents(new QuestListeners(this, sql_util), this);
 	}
 	
 	@Override
 	public void onDisable() {
 		if (sql != null)
 			sql.disconnect();
-	}
-	
-	@EventHandler
-	public void join(PlayerJoinEvent e) {
-		Player p = e.getPlayer();
-		
-		if (!sql_util.has_account(p))
-			sql_util.CreateUser(p);
 	}
 }

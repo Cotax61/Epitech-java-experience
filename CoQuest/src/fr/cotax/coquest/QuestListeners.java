@@ -7,11 +7,16 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 import fr.cotax.coquest.sql.SqlQuestUtilities;
 
-public class PlayerListeners implements Listener {
-	
+public class QuestListeners implements Listener {
+
 	private SqlQuestUtilities sql_util;
-	private main main
+	private main main;
 	
+	public QuestListeners(main main, SqlQuestUtilities tools)
+	{
+		this.sql_util = tools;
+		this.main = main;
+	}
 	
 	@EventHandler
 	public void join(PlayerJoinEvent e) {
