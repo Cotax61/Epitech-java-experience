@@ -1,8 +1,12 @@
 package fr.cotax.coquest;
 
+import java.util.List;
+
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
 import fr.cotax.coquest.sql.SqlQuestUtilities;
@@ -11,6 +15,7 @@ public class QuestListeners implements Listener {
 
 	private SqlQuestUtilities sql_util;
 	private main main;
+	private List<EntityType> quest_1_ent;
 	
 	public QuestListeners(main main, SqlQuestUtilities tools)
 	{
@@ -24,5 +29,8 @@ public class QuestListeners implements Listener {
 		if (!sql_util.has_account(p))
 			sql_util.CreateUser(p);
 	}
-
+	
+	@EventHandler
+	public void onMobDeath(EntityDeathEvent e) {
+	}
 }
