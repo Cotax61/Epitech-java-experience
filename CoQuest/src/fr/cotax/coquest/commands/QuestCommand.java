@@ -41,8 +41,8 @@ public class QuestCommand implements CommandExecutor {
 	
 	public ItemMeta setDefaultMessage(ItemMeta meta)
 	{
-		meta.setDisplayName("$6Aucune quête");
-		meta.setLore(Arrays.asList("$eVous n'avez aucune quête sur cet emplacement.", "$eCliquez pour en obtenir une !"));
+		meta.setDisplayName("§6Aucune quête");
+		meta.setLore(Arrays.asList("§eVous n'avez aucune quête sur cet emplacement.", "§eCliquez pour en obtenir une !"));
 		return (meta);
 	}
 	
@@ -72,6 +72,7 @@ public class QuestCommand implements CommandExecutor {
 			Inventory menu = Bukkit.createInventory(null, 9, "§7Tâches à réaliser");
 			
 			menu.setItem(0, CreatePaperSheet(player, 1));
+			player.openInventory(menu);
 		}
 		return false;
 	}

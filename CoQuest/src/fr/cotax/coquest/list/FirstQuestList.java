@@ -1,5 +1,6 @@
 package fr.cotax.coquest.list;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,13 +44,14 @@ public class FirstQuestList {
 	public FirstQuestList(SqlQuestUtilities util)
 	{
 		this.util = util;
+		kill_list = new ArrayList<EntityType>();
 		kill_list.add(EntityType.ZOMBIE);
 		kill_list.add(EntityType.SKELETON);
 	}
 	
 	public void check_entity_kill(EntityType type, Player player)
 	{
-		if (!kill_list.contains(type))
+		if (!kill_list.contains(type) || player == null)
 			return;
 		if (type == EntityType.ZOMBIE && util.get_quest_id(player, 1) == 1)
 			util.change_progress(player, 1, 1);

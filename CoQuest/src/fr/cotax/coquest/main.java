@@ -5,6 +5,7 @@ import java.sql.Connection;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import fr.cotax.coquest.commands.QuestCommand;
 import fr.cotax.coquest.sql.SqlConnection;
 import fr.cotax.coquest.sql.SqlQuestUtilities;
 

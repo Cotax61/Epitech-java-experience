@@ -4,5 +4,9 @@ author: Cotax
 main: fr.cotax.coquest.main
 api-version: 1.15
 commands:
-   quest:
-      description: Te montre les quêtes que tu peux accomplir
+  test:
+    description: Basicaly, a test command
+  alert:
+    description: Un broadcast custom
+  quest:
+    description: Command to see quest

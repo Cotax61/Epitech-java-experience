@@ -85,7 +85,7 @@ public class SqlQuestUtilities {
 		if (new_points < 0)
 			return false;
 		try {
-			PreparedStatement q = connection.prepareStatement("UPDATE  SET quest_points = ? WHERE uuid = ?");
+			PreparedStatement q = connection.prepareStatement("UPDATE players SET quest_points = ? WHERE uuid = ?");
 			q.setInt(1, new_points);
 			q.setString(1,  player.getUniqueId().toString());
 			q.executeUpdate();
@@ -99,18 +99,18 @@ public class SqlQuestUtilities {
 	
 	public int get_quest_id(Player player, int q_nbr)
 	{
-		String id_string = "quest_" + q_nbr + "id";
+		String id_string = "quest_" + q_nbr + "_id";
 		
 		try {
 			PreparedStatement q = connection.prepareStatement("SELECT " + id_string + " FROM players WHERE uuid = ?");
-			q.setString(1,  player.getUniqueId().toString());
-			int points = 0;
+			q.setString(1, player.getUniqueId().toString());
+			int id = 0;
 			ResultSet rs = q.executeQuery();
 			while (rs.next()) {
-				points = rs.getInt("");
+				id = rs.getInt(id_string);
 			}
 			q.close();
-			return (points);
+			return (id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -122,12 +122,15 @@ public class SqlQuestUtilities {
 		int old_id = get_quest_id(player, id);
 		int max_id_tab[] = {2, 1, 1, 1, 1};
 		Random rand = new Random();
-		int new_id = rand.nextInt(max_id_tab[id] - 1) + 1;
+		System.out.println("The id you are searching for is : " + id);
+		int new_id = 1;
+		//		int new_id = rand.nextInt(max_id_tab[id] - 1) + 1;
 
-		while (old_id == new_id)
-			new_id = rand.nextInt(max_id_tab[id] - 1) + 1;
+//		while (old_id == new_id)
+//			new_id = rand.nextInt(max_id_tab[id] - 1) + 1;
+		String quest_string = "quest_" + id + "_id";
 		try {
-			PreparedStatement q = connection.prepareStatement("UPDATE SET quest_points = ? WHERE uuid = ?");
+			PreparedStatement q = connection.prepareStatement("UPDATE players SET " + quest_string + " = ? WHERE uuid = ?");
 			q.setInt(1, new_id);
 			q.setString(2,  player.getUniqueId().toString());
 			q.executeUpdate();
@@ -141,16 +144,15 @@ public class SqlQuestUtilities {
 	
 	public int get_quest_progress(Player player, int q_id)
 	{
-		String quest_str = "q" + q_id + "progress";
+		String quest_str = "q" + q_id + "_progress";
 		
 		try {
-			PreparedStatement q = connection.prepareStatement("SELECT " + quest_str + " FROM players WHERE uuid = ?");
-			q.setString(1,  player.getUniqueId().toString());
-			q.executeUpdate();
-			int progress = 0;
+			PreparedStatement q = connection.prepareStatement("SELECT q1_progress FROM players WHERE uuid = ?");
+			q.setString(1, player.getUniqueId().toString());
+ 			int progress = 0;
 			ResultSet rs = q.executeQuery();
 			while (rs.next()) {
-				progress = rs.getInt("");
+				progress = rs.getInt(quest_str);
 			}
 			q.close();
 			return progress;
@@ -164,10 +166,10 @@ public class SqlQuestUtilities {
 	{
 		int old_prog = get_quest_progress(player, q_id);
 		int new_prog = old_prog + prog_added;
-		String quest_str = "q" + q_id + "progress";
+		String quest_str = "q" + q_id + "_progress";
 
 		try {
-			PreparedStatement q = connection.prepareStatement("UPDATE SET " + quest_str + " = ? WHERE uuid = ?");
+			PreparedStatement q = connection.prepareStatement("UPDATE players SET " + quest_str + " = ? WHERE uuid = ?");
 			q.setInt(1, new_prog);
 			q.setString(2,  player.getUniqueId().toString());
 			q.executeUpdate();
