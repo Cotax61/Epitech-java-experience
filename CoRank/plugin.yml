@@ -1,0 +1,5 @@
+name: CoRank
+version: 1.0
+author: Cotax
+main: fr.cotax.corank.main
+api-version: 1.15
