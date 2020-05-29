@@ -23,11 +23,23 @@ public class FirstQuestList {
 		}
 	}
 	
+	public String DifficultyStar(int dif)
+	{
+		switch (dif) {
+		case 1: return ("§a\u272D§7\u272D\u272D\u272D\u272D");
+		case 2: return ("§2\u272D\u272D§7\u272D\u272D\u272D");
+		case 3: return ("§e\u272D\u272D\u272D§7\u272D\u272D");
+		case 4: return ("§c\u272D\u272D\u272D\u272D§7\u272D");
+		case 5: return ("§4\u272D\u272D\u272D\u272D\u272D");
+		default: return (null);
+		}
+	}
+	
 	public List<String> getQuestLore(Player player, int index)
 	{
 		switch (index) {
-		case 1: return (Arrays.asList("§eLes zombies sont une vraie peste ici", "§eRend service a la communauté et débarasse toi", "§ede 12 d'entre eux, tu sera payer bien sûr", "", "§cTuer : " + util.get_quest_progress(player, 1) + "/12", "§eRécompense : " + getQuestReward(1)));
-		case 2: return (Arrays.asList("$eAh ces squelettes m'énervent avec leurs arc !", "§eTu peux en tuer une dizaine ?", "§eils feront moins les malins après ça !", "", "§cTuer : " + util.get_quest_progress(player, 1) + "/10", "§eRécompense : " + getQuestReward(2)));
+		case 1: return (Arrays.asList("", DifficultyStar(1), "", "§eLes zombies sont une vraie peste ici", "§eRend service a la communauté et débarasse toi", "§ede 12 d'entre eux, tu sera payer bien sûr", "", "§cTuer : " + util.get_quest_progress(player, 1) + "/12", "§eRécompense : " + getQuestReward(1) + "\u2726"));
+		case 2: return (Arrays.asList("§eAh ces squelettes m'énervent avec leurs arc !", "§eTu peux en tuer une dizaine ?", "§eils feront moins les malins après ça !", "", "§cTuer : " + util.get_quest_progress(player, 1) + "/10", "§eRécompense : " + getQuestReward(2)));
 		default: return null;
 		}
 	}
