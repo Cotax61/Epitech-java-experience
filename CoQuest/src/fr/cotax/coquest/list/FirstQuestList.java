@@ -24,6 +24,9 @@ public class FirstQuestList {
 		case 2: return ("§c§lChasse aux squelettes.");
 		case 3: return ("§c§lBesoins de poissons.");
 		case 4: return ("§cAttaque de saumons sauvage.");
+		case 5: return ("§cAu fourneau !.");
+		case 6: return ("§cCourte séssion de minage.");
+		case 7: return ("§cTimber !.");
 		default: return ("§c§lUhm... there is no quest N°" + index);
 		}
 	}
@@ -69,10 +72,10 @@ public class FirstQuestList {
 		case 1: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aTuer " + progressNeeded(1) + " Zombies", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(1), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(1) + "\u2726"));
 		case 2: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aTuer " + progressNeeded(2) + " Squelettes", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(2), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(2) + "\u2726"));
 		case 3: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aPêche " + progressNeeded(3) + " Objets", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(3), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(3) + "\u2726"));
-		case 4: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aTuer " + progressNeeded(3) + " Saumons", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(4) + "\u2726"));
-		case 5: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aDetruire " + progressNeeded(3) + " Minerais de charbon", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(5), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(5) + "\u2726"));
-		case 6: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aDetruire " + progressNeeded(3) + " Pierres", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(6), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(6) + "\u2726"));
-		case 7: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aDetruire " + progressNeeded(3) + " Bûches de chêne", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(7), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(7) + "\u2726"));
+		case 4: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aTuer " + progressNeeded(4) + " Saumons", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(4) + "\u2726"));
+		case 5: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aDetruire " + progressNeeded(5) + " Minerais de charbon", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(5), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(5) + "\u2726"));
+		case 6: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aDetruire " + progressNeeded(6) + " Pierres", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(6), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(6) + "\u2726"));
+		case 7: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aDetruire " + progressNeeded(7) + " Bûches de chêne", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(7), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(7) + "\u2726"));
 		default: return null;
 		}
 	}
@@ -142,7 +145,7 @@ public class FirstQuestList {
 			util.change_progress(player, 1, 1);
 		else if (mat == Material.OAK_LOG && id == 7)
 			util.change_progress(player, 1, 1);
-
+		check_quest_end(player, id);
 	}
 	
 	public void check_fishing(Player player) {

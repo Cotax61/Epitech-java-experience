@@ -51,12 +51,17 @@ public class QuestCommand implements CommandExecutor {
 		ItemStack item = new ItemStack(Material.PAPER);
 		ItemMeta meta = item.getItemMeta();
 		int player_quest = util.get_quest_id(player, quest_id);
-		
+
 		if (player_quest == 0) {
 			meta = setDefaultMessage(meta);
 		} else {
-			meta.setDisplayName(first.getQuestName(util.get_quest_id(player, quest_id)));
-			meta.setLore(first.getQuestLore(player, util.get_quest_id(player, quest_id)));
+			if (quest_id == 1) {
+				meta.setDisplayName(first.getQuestName(player_quest));
+				meta.setLore(first.getQuestLore(player, player_quest));
+			} else if (quest_id == 2) {
+				meta.setDisplayName(second.getQuestName(player_quest));
+				meta.setLore(second.getQuestLore(player, player_quest));
+			}
 			item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		}
@@ -72,6 +77,7 @@ public class QuestCommand implements CommandExecutor {
 			Inventory menu = Bukkit.createInventory(null, 9, "§7Tâches à réaliser");
 			
 			menu.setItem(0, CreatePaperSheet(player, 1));
+			menu.setItem(1, CreatePaperSheet(player, 2));
 			player.openInventory(menu);
 		}
 		return false;
