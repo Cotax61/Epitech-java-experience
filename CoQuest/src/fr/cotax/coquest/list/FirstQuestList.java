@@ -44,10 +44,15 @@ public class FirstQuestList {
 		}
 	}
 	
+	public String QuestDescBorder()
+	{
+		return ("§8§u____________________");
+	}
+	
 	public List<String> getQuestLore(Player player, int index)
 	{
 		switch (index) {
-		case 1: return (Arrays.asList("", DifficultyStar(1), "", "§eLes zombies sont une vraie peste ici", "§eRend service a la communauté et débarasse toi", "§ede 12 d'entre eux, tu sera payer bien sûr", "", "§cTuer : " + util.get_quest_progress(player, 1) + "/12", "§eRécompense : " + getQuestReward(1) + "\u2726"));
+		case 1: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(), "§aTuer " + progressNeeded(1) + "Zombies", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(1), QuestDescBorder(), "§dRécompense :", "§7§l- §6" + getQuestReward(1) + "\u2726"));
 		case 2: return (Arrays.asList("§eAh ces squelettes m'énervent avec leurs arc !", "§eTu peux en tuer une dizaine ?", "§eils feront moins les malins après ça !", "", "§cTuer : " + util.get_quest_progress(player, 1) + "/10", "§eRécompense : " + getQuestReward(2)));
 		default: return null;
 		}
