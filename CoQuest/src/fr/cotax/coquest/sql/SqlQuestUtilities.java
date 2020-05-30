@@ -122,7 +122,7 @@ public class SqlQuestUtilities {
 	
 	public boolean change_quest(Player player, int id, boolean set_to_zero)
 	{		
-		int max_id_tab[] = {7, 6, 7, 1, 1};
+		int max_id_tab[] = {7, 6, 7, 4, 1};
 		Random rand = new Random();
 		int new_id = rand.nextInt(max_id_tab[id - 1]) + 1;
 

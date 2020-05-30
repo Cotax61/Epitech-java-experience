@@ -78,8 +78,8 @@ public class FourthQuestList {
 	{
 		switch (q_index) {
 		case 1: return (36);
-		case 2: return (55);
-		case 3: return (48);
+		case 2: return (80);
+		case 3: return (64);
 		case 4: return (37);
 		default: return 0;
 		}
@@ -101,12 +101,12 @@ public class FourthQuestList {
 	
 	public void CheckTame(Player player, EntityType Tamed)
 	{
-		int id = util.get_quest_id(player, 3);
+		int id = util.get_quest_id(player, 4);
 		
-		if (id != 1 || player == null || Tamed == null)
+		if (id != 4 || player == null || Tamed == null)
 			return;
-		if (Tamed == EntityType.CAT) {
-			util.change_progress(player, 3, 1);
+		if (Tamed == EntityType.PARROT) {
+			util.change_progress(player, 4, 1);
 			check_quest_end(player, id);
 		}			
 	}
@@ -121,65 +121,39 @@ public class FourthQuestList {
 		player.sendMessage("§7§l- §6 " + getQuestReward(id) + "\u2726");
 		player.sendMessage(QuestDescBorder(2));
 		player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 0.7f);
-		int set_prog_zero = util.get_quest_progress(player, 3);
+		int set_prog_zero = util.get_quest_progress(player, 4);
 		set_prog_zero *= -1;
-		util.change_progress(player, 3, set_prog_zero);
-		util.change_quest(player, 3, true);
+		util.change_progress(player, 4, set_prog_zero);
+		util.change_quest(player, 4, true);
 		util.add_points(player, reward);
 	}
 	
 	public void check_quest_end(Player player, int id)
 	{
-		if (util.get_quest_progress(player, 3) >= progressNeeded(id)) {
+		if (util.get_quest_progress(player, 4) >= progressNeeded(id)) {
 			CompleteQuest(player, getQuestReward(id), id);
 		}
 	}
 
-	public void check_arrow_hit(Player player)
-	{
-		int id = util.get_quest_id(player, 3);
-		if (player == null || id != 4)
-			return;
-		util.change_progress(player, 3, 1);
-		check_quest_end(player, id);
-	}
-	
 	public void check_break(Player player, Material mat) 
 	{
-		int id = util.get_quest_id(player, 3);
+		int id = util.get_quest_id(player, 4);
 		if (!break_list.contains(mat) || player == null || id == 0)
 			return;
-		else if (mat == Material.GOLD_ORE && id == 7)
-			util.change_progress(player, 3, 1);
-		else if (mat == Material.LAPIS_ORE && id == 5)
-			util.change_progress(player, 3, 1);
-		else if (mat == Material.DIAMOND_ORE && id == 6)
-			util.change_progress(player, 3, 1);
+		else if (mat == Material.EMERALD_ORE && id == 3)
+			util.change_progress(player, 4, 1);
 		check_quest_end(player, id);
-	}
-
-	public void death_reset(Player p)
-	{
-		int id = util.get_quest_id(p, 3);
-		
-		if (id != 5)
-			return;
-		int set_prog_zero = util.get_quest_progress(p, 2);
-		set_prog_zero *= -1;
-		util.change_progress(p, 2, set_prog_zero);		
 	}
 	
 	public void check_entity_kill(EntityType type, Player player)
 	{
-		int id = util.get_quest_id(player, 3);
+		int id = util.get_quest_id(player, 4);
 		if (!kill_list.contains(type) || player == null || id == 0)
 			return;
-		if (type == EntityType.GHAST && id == 2)
-			util.change_progress(player, 3, 1);
-		else if (type == EntityType.GUARDIAN && id == 3)
-			util.change_progress(player, 3, 1);
-		else if (type == EntityType.ENDERMAN && id == 4)
-			util.change_progress(player, 3, 1);
+		if (type == EntityType.WITHER_SKELETON && id == 1)
+			util.change_progress(player, 4, 1);
+		else if (type == EntityType.RAVAGER && id == 2)
+			util.change_progress(player, 4, 1);
 		check_quest_end(player, id);
 	}
 }

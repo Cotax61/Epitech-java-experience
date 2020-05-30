@@ -25,8 +25,7 @@ public class SecondQuestList {
 		case 3: return ("§c§lUn coprs d'acier.");
 		case 4: return ("§c§lEntrainement de précision.");
 		case 5: return ("§c§lUn challenge stupide.");
-		case 6: return ("§c§lCristal brillant.");
-		case 7: return ("§c§lBesoins méchanique");
+		case 6: return ("§c§lBesoins méchanique");
 		default: return ("§c§lUhm... there is no quest N°" + index);
 		}
 	}
@@ -51,8 +50,7 @@ public class SecondQuestList {
 		case 3: return (24);
 		case 4: return (15);
 		case 5: return (100);
-		case 6: return (32);
-		case 7: return (20);
+		case 6: return (20);
 		default: return (0);
 		}
 	}
@@ -74,8 +72,7 @@ public class SecondQuestList {
 		case 3: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aDétruire " + progressNeeded(3) + " Minerais de fer", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(3), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(3) + "\u2726"));
 		case 4: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aToucher " + progressNeeded(4) + " Montres avec une flèche", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(4) + "\u2726"));
 		case 5: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aTanker " + progressNeeded(5) + " Dégâts sans mourrir", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(5), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(5) + "\u2726"));
-		case 6: return (Arrays.asList(DifficultyStar(3), QuestDescBorder(1), "§aDétruire " + progressNeeded(6) + " Minerais de quartz", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(6), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(6) + "\u2726"));
-		case 7: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aDétruire " + progressNeeded(7) + " Minerais de Redstone", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(7), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(7) + "\u2726"));
+		case 6: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aDétruire " + progressNeeded(6) + " Minerais de Redstone", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(6), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(6) + "\u2726"));
 		default: return null;
 		}
 	}
@@ -88,8 +85,7 @@ public class SecondQuestList {
 		case 3: return (13);
 		case 4: return (9);
 		case 5: return (16);
-		case 6: return (23);
-		case 7: return (18);
+		case 6: return (18);
 		default: return 0;
 		}
 	}
@@ -147,9 +143,7 @@ public class SecondQuestList {
 			return;
 		if (mat == Material.IRON_ORE && id == 3)
 			util.change_progress(player, 2, 1);
-		else if (mat == Material.NETHER_QUARTZ_ORE && id == 6)
-			util.change_progress(player, 2, 1);
-		else if (mat == Material.REDSTONE_ORE && id == 7)
+		else if (mat == Material.REDSTONE_ORE && id == 6)
 			util.change_progress(player, 2, 1);
 		check_quest_end(player, id);
 	}
