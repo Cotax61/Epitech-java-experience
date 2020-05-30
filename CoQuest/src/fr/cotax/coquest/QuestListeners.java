@@ -78,11 +78,13 @@ public class QuestListeners implements Listener {
 		if (b.hasMetadata("PlacedBlock") || p == null)
 			return;
 		first.check_break(p, b.getType());
+		second.check_break(p, b.getType());
 	}
 	
 	@EventHandler
 	public void onMobDeath(EntityDeathEvent e) {
 		first.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
+		second.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
 	}
 	
 	@EventHandler
