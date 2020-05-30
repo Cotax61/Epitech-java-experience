@@ -13,6 +13,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityTameEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -45,6 +46,7 @@ public class QuestListeners implements Listener {
 		this.main = main;
 		first = new FirstQuestList(sql_util);
 		second = new SecondQuestList(sql_util);
+		third = new ThirdQuestList(sql_util);
 		plug = main.getServer().getPluginManager().getPlugin("CoQuest");
 	}
 	
@@ -88,6 +90,14 @@ public class QuestListeners implements Listener {
 			
 	}
 
+	@EventHandler
+	public void onTame(EntityTameEvent e)
+	{
+		Player player = (Player)e.getOwner();
+		
+		third.CheckTame(player, e.getEntityType());
+	}
+	
 	@EventHandler
 	public void OnDamage(EntityDamageEvent e)
 	{
