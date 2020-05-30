@@ -46,6 +46,7 @@ public class QuestListeners implements Listener {
 		first = new FirstQuestList(sql_util);
 		second = new SecondQuestList(sql_util);
 		third = new ThirdQuestList(sql_util);
+		fourth = new FourthQuestList(sql_util);
 	}
 	
 	@EventHandler
@@ -94,6 +95,7 @@ public class QuestListeners implements Listener {
 		Player player = (Player)e.getOwner();
 		
 		third.CheckTame(player, e.getEntityType());
+		fourth.CheckTame(player, e.getEntityType());
 	}
 	
 	@EventHandler
@@ -118,14 +120,16 @@ public class QuestListeners implements Listener {
 			return;
 		first.check_break(p, b.getType());
 		second.check_break(p, b.getType());
+		third.check_break(p, b.getType());
+		fourth.check_break(p, b.getType());
 	}
 
-	
 	@EventHandler
 	public void onMobDeath(EntityDeathEvent e) {
 		first.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
 		second.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
 		third.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
+		fourth.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
 		if (e.getEntity() instanceof Player)
 			second.death_reset((Player)e.getEntity());
 	}
