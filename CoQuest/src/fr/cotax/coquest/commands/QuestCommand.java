@@ -36,24 +36,40 @@ public class QuestCommand implements CommandExecutor {
       	second = new SecondQuestList(util);
  		third = new ThirdQuestList(util);
 		fourth = new FourthQuestList(util);
-//		fifth = new FifthQuestList(util);
+		fifth = new FifthQuestList(util);
+	}
+
+	public String getQuestLength(int quest_id)
+	{
+		String length = "§7Durée §8- ";
+		
+		switch (quest_id) {
+		case 1: return (length + "§aTrès courte");
+		case 2: return (length + "§2Courte");
+		case 3: return (length + "§eMoyenne");
+		case 4: return (length + "§6Longue");
+		case 5: return (length + "§4Très très longue!");
+		default: return (null);
+		}
 	}
 	
-	public ItemMeta setDefaultMessage(ItemMeta meta)
+	public ItemMeta setDefaultMessage(ItemMeta meta, int quest_id)
 	{
+
 		meta.setDisplayName("§6Aucune quête");
-		meta.setLore(Arrays.asList("§eVous n'avez aucune quête sur cet emplacement.", "§eCliquez pour en obtenir une !"));
+		meta.setLore(Arrays.asList("", getQuestLength(quest_id), "", "§eVous n'avez aucune quête sur cet emplacement.", "§eCliquez pour en obtenir une !"));
 		return (meta);
 	}
 	
-	public ItemStack CreatePaperSheet(Player player, int quest_id)
+	public ItemStack CreateQuestItem(Player player, int quest_id)
 	{
-		ItemStack item = new ItemStack(Material.PAPER);
+		Material quest_item_list[] = {Material.PAPER, Material.PAPER, Material.BOOK, Material.BOOK, Material.BOOKSHELF};
+		ItemStack item = new ItemStack(quest_item_list[quest_id - 1]);
 		ItemMeta meta = item.getItemMeta();
 		int player_quest = util.get_quest_id(player, quest_id);
 
 		if (player_quest == 0) {
-			meta = setDefaultMessage(meta);
+			meta = setDefaultMessage(meta, quest_id);
 		} else {
 			if (quest_id == 1) {
 				meta.setDisplayName(first.getQuestName(player_quest));
@@ -67,12 +83,25 @@ public class QuestCommand implements CommandExecutor {
 			} else if (quest_id == 4) {
 				meta.setDisplayName(fourth.getQuestName(player_quest));
 				meta.setLore(fourth.getQuestLore(player, player_quest));
+			} else if (quest_id == 5) {
+				meta.setDisplayName(fifth.getQuestName(player_quest));
+				meta.setLore(fifth.getQuestLore(player, player_quest));
 			}
 			item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		}
 		item.setItemMeta(meta);
 		return item;
+	}
+	
+	public ItemStack CreateEmptyItem(Material mat)
+	{
+		ItemStack item = new ItemStack(mat);
+		ItemMeta meta = item.getItemMeta();
+		
+		meta.setDisplayName(" ");
+		item.setItemMeta(meta);
+		return (item);
 	}
 	
 	@Override
@@ -82,10 +111,15 @@ public class QuestCommand implements CommandExecutor {
 			Player player = (Player)sender;
 			Inventory menu = Bukkit.createInventory(null, 9, "§7Tâches à réaliser");
 			
-			menu.setItem(0, CreatePaperSheet(player, 1));
-			menu.setItem(1, CreatePaperSheet(player, 2));
-			menu.setItem(2, CreatePaperSheet(player, 3));
-			menu.setItem(3, CreatePaperSheet(player, 4));
+			menu.setItem(0, CreateQuestItem(player, 1));
+			menu.setItem(1, CreateQuestItem(player, 2));
+			menu.setItem(2, CreateQuestItem(player, 3));
+			menu.setItem(3, CreateQuestItem(player, 4));
+			menu.setItem(4, CreateQuestItem(player, 5));
+			menu.setItem(5, CreateEmptyItem(Material.GRAY_STAINED_GLASS_PANE));
+			menu.setItem(6, CreateEmptyItem(Material.GRAY_STAINED_GLASS_PANE));
+			menu.setItem(7, CreateEmptyItem(Material.IRON_BARS));
+			menu.setItem(8, CreateEmptyItem(Material.CHEST));
 			player.openInventory(menu);
 		}
 		return false;

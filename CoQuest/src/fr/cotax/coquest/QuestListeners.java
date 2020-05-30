@@ -47,6 +47,7 @@ public class QuestListeners implements Listener {
 		second = new SecondQuestList(sql_util);
 		third = new ThirdQuestList(sql_util);
 		fourth = new FourthQuestList(sql_util);
+		fifth = new FifthQuestList(sql_util);
 	}
 	
 	@EventHandler
@@ -107,6 +108,7 @@ public class QuestListeners implements Listener {
 			if (dmg == 0)
 				dmg = 1;
 			second.check_dmg_recieved((Player)e.getEntity(), dmg);
+			fifth.check_dmg_recieved((Player)e.getEntity(), dmg);
 		}
 	}
 	
