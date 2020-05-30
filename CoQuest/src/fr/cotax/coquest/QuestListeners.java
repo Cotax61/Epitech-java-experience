@@ -33,7 +33,6 @@ public class QuestListeners implements Listener {
 
 	private SqlQuestUtilities sql_util;
 	private main main;
-	private Plugin plug;
 	private FirstQuestList first;
 	private SecondQuestList second;
 	private ThirdQuestList third;
@@ -47,7 +46,6 @@ public class QuestListeners implements Listener {
 		first = new FirstQuestList(sql_util);
 		second = new SecondQuestList(sql_util);
 		third = new ThirdQuestList(sql_util);
-		plug = main.getServer().getPluginManager().getPlugin("CoQuest");
 	}
 	
 	@EventHandler
@@ -127,6 +125,7 @@ public class QuestListeners implements Listener {
 	public void onMobDeath(EntityDeathEvent e) {
 		first.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
 		second.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
+		third.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
 		if (e.getEntity() instanceof Player)
 			second.death_reset((Player)e.getEntity());
 	}

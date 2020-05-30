@@ -34,7 +34,7 @@ public class QuestCommand implements CommandExecutor {
 		this.util = util;
 		first = new FirstQuestList(util);
       	second = new SecondQuestList(util);
-//		third = new ThirdQuestList(util);
+ 		third = new ThirdQuestList(util);
 //		fourth = new FourthQuestList(util);
 //		fifth = new FifthQuestList(util);
 	}
@@ -55,13 +55,8 @@ public class QuestCommand implements CommandExecutor {
 		if (player_quest == 0) {
 			meta = setDefaultMessage(meta);
 		} else {
-			if (quest_id == 1) {
-				meta.setDisplayName(first.getQuestName(player_quest));
-				meta.setLore(first.getQuestLore(player, player_quest));
-			} else if (quest_id == 2) {
-				meta.setDisplayName(second.getQuestName(player_quest));
-				meta.setLore(second.getQuestLore(player, player_quest));
-			}
+			meta.setDisplayName(second.getQuestName(player_quest));
+			meta.setLore(second.getQuestLore(player, player_quest));
 			item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		}
@@ -78,6 +73,7 @@ public class QuestCommand implements CommandExecutor {
 			
 			menu.setItem(0, CreatePaperSheet(player, 1));
 			menu.setItem(1, CreatePaperSheet(player, 2));
+			menu.setItem(2, CreatePaperSheet(player, 3));
 			player.openInventory(menu);
 		}
 		return false;
