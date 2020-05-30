@@ -110,7 +110,7 @@ public class SecondQuestList {
 	
 	public void check_quest_end(Player player, int id)
 	{
-		if (util.get_quest_progress(player, 1) >= progressNeeded(id)) {
+		if (util.get_quest_progress(player, 2) >= progressNeeded(id)) {
 			CompleteQuest(player, getQuestReward(id), id);
 		}
 	}
