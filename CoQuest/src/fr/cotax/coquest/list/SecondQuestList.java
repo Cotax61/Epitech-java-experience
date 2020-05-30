@@ -117,7 +117,7 @@ public class SecondQuestList {
 	
 	public void check_break(Player player, Material mat) 
 	{
-		int id = util.get_quest_id(player, 1);
+		int id = util.get_quest_id(player, 2);
 			if (!break_list.contains(mat) || player == null || id == 0)
 			return;
 		if (mat == Material.IRON_ORE && id == 3)
@@ -127,8 +127,8 @@ public class SecondQuestList {
 
 	public void check_entity_kill(EntityType type, Player player)
 	{
-		int id = util.get_quest_id(player, 1);
-			if (!kill_list.contains(type) || player == null || id == 0)
+		int id = util.get_quest_id(player, 2);
+		if (!kill_list.contains(type) || player == null || id == 0)
 			return;
 		if (type == EntityType.CREEPER && id == 1)
 			util.change_progress(player, 2, 1);

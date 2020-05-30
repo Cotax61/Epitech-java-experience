@@ -41,6 +41,7 @@ public class QuestListeners implements Listener {
 		this.sql_util = tools;
 		this.main = main;
 		first = new FirstQuestList(sql_util);
+		second = new SecondQuestList(sql_util);
 		plug = main.getServer().getPluginManager().getPlugin("CoQuest");
 	}
 	
