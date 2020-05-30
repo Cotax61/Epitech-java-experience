@@ -22,6 +22,11 @@ public class ThirdQuestList {
 		switch (index) {
 		case 1: return ("§c§lUn ami a moustaches.");
 		case 2: return ("§c§lS.O.S Ghast");
+		case 3: return ("§c§lVous ne passerez pas !");
+		case 4: return ("§c§lHomme mystérieux.");
+		case 5: return ("§c§lL'aide de merlin.");
+		case 6: return ("§c§lEnvie de brillance.");
+		case 7: return ("§c§lDe l'or, des montagnes d'or !");
 		default: return ("§c§lUhm... there is no quest N°" + index);
 		}
 	}
@@ -43,6 +48,11 @@ public class ThirdQuestList {
 		switch (idx) {
 		case 1: return (1);
 		case 2: return (2);
+		case 3: return (10);
+		case 4: return (6);
+		case 5: return (18);
+		case 6: return (12);
+		case 7: return (24);
 		default: return (0);
 		}
 	}
@@ -61,10 +71,11 @@ public class ThirdQuestList {
 		switch (index) {
 		case 1: return (Arrays.asList(DifficultyStar(3), QuestDescBorder(1), "§aApprivoiser " + progressNeeded(1) + " Chat", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(1), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(1) + "\u2726"));
 		case 2: return (Arrays.asList(DifficultyStar(3), QuestDescBorder(1), "§aTuer " + progressNeeded(2) + " Ghasts", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(2), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(2) + "\u2726"));
-		case 3: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aDétruire " + progressNeeded(3) + " Minerais de fer", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(3), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(3) + "\u2726"));
-		case 4: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aToucher " + progressNeeded(4) + " Montres avec une flèche", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(4) + "\u2726"));
-		case 5: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aTanker " + progressNeeded(5) + " Dégâts sans mourrir", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(5), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(5) + "\u2726"));
-		case 6: return (Arrays.asList(DifficultyStar(3), QuestDescBorder(1), "§aDétruire " + progressNeeded(6) + " Minerais de quartz", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(6), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(6) + "\u2726"));
+		case 3: return (Arrays.asList(DifficultyStar(4), QuestDescBorder(1), "§aTuer " + progressNeeded(3) + " Guardiens", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(3), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(3) + "\u2726"));
+		case 4: return (Arrays.asList(DifficultyStar(3), QuestDescBorder(1), "§aTuer " + progressNeeded(4) + " Endermans", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(4) + "\u2726"));
+		case 5: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aDétruire " + progressNeeded(5) + " Minerais de quartz", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(5), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(5) + "\u2726"));
+		case 6: return (Arrays.asList(DifficultyStar(4), QuestDescBorder(1), "§aDétruire " + progressNeeded(6) + " Minerais de diamant", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(6), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(6) + "\u2726"));
+		case 7: return (Arrays.asList(DifficultyStar(3), QuestDescBorder(1), "§aDétruire " + progressNeeded(7) + " Minerais d'or", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(7), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(7) + "\u2726"));
 		default: return null;
 		}
 	}
@@ -72,8 +83,13 @@ public class ThirdQuestList {
 	public int getQuestReward(int q_index)
 	{
 		switch (q_index) {
-		case 1: return (29);
+		case 1: return (31);
 		case 2: return (30);
+		case 3: return (45);
+		case 4: return (34);
+		case 5: return (24);
+		case 6: return (48);
+		case 7: return (32);
 		default: return 0;
 		}
 	}
@@ -83,8 +99,13 @@ public class ThirdQuestList {
 		this.util = util;
 		kill_list = new ArrayList<EntityType>();
 		kill_list.add(EntityType.GHAST);
+		kill_list.add(EntityType.GUARDIAN);
+		kill_list.add(EntityType.ENDERMAN);
 
 		break_list = new ArrayList<Material>();
+		break_list.add(Material.LAPIS_ORE);
+		break_list.add(Material.GOLD_ORE);
+		break_list.add(Material.DIAMOND_ORE);
 
 		Tame_list = new ArrayList<EntityType>();
 		Tame_list.add(EntityType.CAT);
@@ -104,8 +125,6 @@ public class ThirdQuestList {
 	
 	public void CompleteQuest(Player player, int reward, int id)
 	{
-		String name = getQuestName(id);
-		
 		player.sendMessage(QuestDescBorder(2));
 		player.sendMessage(getQuestName(id));
 		player.sendMessage("§eQuête accomplie !");
@@ -140,11 +159,13 @@ public class ThirdQuestList {
 	public void check_break(Player player, Material mat) 
 	{
 		int id = util.get_quest_id(player, 3);
-			if (!break_list.contains(mat) || player == null || id == 0)
+		if (!break_list.contains(mat) || player == null || id == 0)
 			return;
-		if (mat == Material.IRON_ORE && id == 3)
+		else if (mat == Material.GOLD_ORE && id == 7)
 			util.change_progress(player, 3, 1);
-		if (mat == Material.NETHER_QUARTZ_ORE && id == 6)
+		else if (mat == Material.LAPIS_ORE && id == 5)
+			util.change_progress(player, 3, 1);
+		else if (mat == Material.DIAMOND_ORE && id == 6)
 			util.change_progress(player, 3, 1);
 		check_quest_end(player, id);
 	}
@@ -167,7 +188,9 @@ public class ThirdQuestList {
 			return;
 		if (type == EntityType.GHAST && id == 2)
 			util.change_progress(player, 3, 1);
-		else if (type == EntityType.WITCH && id == 2)
+		else if (type == EntityType.GUARDIAN && id == 3)
+			util.change_progress(player, 3, 1);
+		else if (type == EntityType.ENDERMAN && id == 4)
 			util.change_progress(player, 3, 1);
 		check_quest_end(player, id);
 	}

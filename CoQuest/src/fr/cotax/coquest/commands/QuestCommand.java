@@ -55,8 +55,17 @@ public class QuestCommand implements CommandExecutor {
 		if (player_quest == 0) {
 			meta = setDefaultMessage(meta);
 		} else {
-			meta.setDisplayName(second.getQuestName(player_quest));
-			meta.setLore(second.getQuestLore(player, player_quest));
+			if (quest_id == 1) {
+				meta.setDisplayName(first.getQuestName(player_quest));
+				meta.setLore(first.getQuestLore(player, player_quest));
+			} else if (quest_id == 2) {
+				meta.setDisplayName(second.getQuestName(player_quest));
+				meta.setLore(second.getQuestLore(player, player_quest));
+			} else if (quest_id == 3) {
+				meta.setDisplayName(third.getQuestName(player_quest));
+				meta.setLore(third.getQuestLore(player, player_quest));
+			}
+
 			item.addUnsafeEnchantment(Enchantment.DAMAGE_ALL, 1);
 			meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
 		}

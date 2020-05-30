@@ -110,8 +110,6 @@ public class FirstQuestList {
 	
 	public void CompleteQuest(Player player, int reward, int id)
 	{
-		String name = getQuestName(id);
-		
 		player.sendMessage(QuestDescBorder(2));
 		player.sendMessage(getQuestName(id));
 		player.sendMessage("§eQuête accomplie !");
