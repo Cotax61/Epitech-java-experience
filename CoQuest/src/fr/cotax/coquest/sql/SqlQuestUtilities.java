@@ -101,6 +101,9 @@ public class SqlQuestUtilities {
 	{
 		String id_string = "quest_" + q_nbr + "_id";
 		
+		if (player == null)
+			return (0);
+		
 		try {
 			PreparedStatement q = connection.prepareStatement("SELECT " + id_string + " FROM players WHERE uuid = ?");
 			q.setString(1, player.getUniqueId().toString());
@@ -123,8 +126,8 @@ public class SqlQuestUtilities {
 		int max_id_tab[] = {2, 1, 1, 1, 1};
 		Random rand = new Random();
 		System.out.println("The id you are searching for is : " + id);
-		int new_id = 1;
-		//		int new_id = rand.nextInt(max_id_tab[id] - 1) + 1;
+		int new_id = rand.nextInt(1);
+//		int new_id = rand.nextInt(max_id_tab[id] - 1) + 1;
 
 //		while (old_id == new_id)
 //			new_id = rand.nextInt(max_id_tab[id] - 1) + 1;
@@ -149,7 +152,7 @@ public class SqlQuestUtilities {
 		String quest_str = "q" + q_id + "_progress";
 		
 		try {
-			PreparedStatement q = connection.prepareStatement("SELECT q1_progress FROM players WHERE uuid = ?");
+			PreparedStatement q = connection.prepareStatement("SELECT " + quest_str + " FROM players WHERE uuid = ?");
 			q.setString(1, player.getUniqueId().toString());
  			int progress = 0;
 			ResultSet rs = q.executeQuery();

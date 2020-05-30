@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -44,16 +45,20 @@ public class FirstQuestList {
 		}
 	}
 	
-	public String QuestDescBorder()
+	public String QuestDescBorder(int border)
 	{
-		return ("§8§u____________________");
+		switch (border) {
+		case 1:	return ("§8§n                    ");
+		case 2: return ("§8§m                    ");
+		default: return (null);
+		}
 	}
 	
 	public List<String> getQuestLore(Player player, int index)
 	{
 		switch (index) {
-		case 1: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(), "§aTuer " + progressNeeded(1) + "Zombies", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(1), QuestDescBorder(), "§dRécompense :", "§7§l- §6" + getQuestReward(1) + "\u2726"));
-		case 2: return (Arrays.asList("§eAh ces squelettes m'énervent avec leurs arc !", "§eTu peux en tuer une dizaine ?", "§eils feront moins les malins après ça !", "", "§cTuer : " + util.get_quest_progress(player, 1) + "/10", "§eRécompense : " + getQuestReward(2)));
+		case 1: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aTuer " + progressNeeded(1) + " Zombies", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(1), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(1) + "\u2726"));
+		case 2: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aTuer " + progressNeeded(2) + " Squelettes", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(2), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(2) + "\u2726"));
 		default: return null;
 		}
 	}
@@ -75,11 +80,17 @@ public class FirstQuestList {
 		kill_list.add(EntityType.SKELETON);
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void CompleteQuest(Player player, int reward, int id)
 	{
 		String name = getQuestName(id);
-		player.sendTitle("§6" + name, "§eQuête complétée !");
+
+		player.sendMessage(QuestDescBorder(1));
+		player.sendMessage("§eQuête accomplie !");
+		player.sendMessage("");
+		player.sendMessage("§dRécompense: ");
+		player.sendMessage("§7§l- §6 " + getQuestReward(1) + "\u2726");
+		player.sendMessage(QuestDescBorder(2));
+		player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 0.7f);
 		util.change_quest(player, 1, true);
 		util.add_points(player, reward);
 		util.change_progress(player, id, progressNeeded(id) * -1);

@@ -1,5 +1,6 @@
 package fr.cotax.coquest;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -62,6 +63,7 @@ public class QuestListeners implements Listener {
 			if (current.getType() == Material.PAPER && sql_util.get_quest_id(player, e.getSlot() + 1) == 0) {
 				sql_util.change_quest(player, e.getSlot() + 1, false);
 				view.close();
+				Bukkit.getServer().dispatchCommand(player, "quest");
 			}
 		}
 	}
