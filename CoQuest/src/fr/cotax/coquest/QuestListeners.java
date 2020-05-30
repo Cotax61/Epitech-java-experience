@@ -3,12 +3,14 @@ package fr.cotax.coquest;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerFishEvent;
@@ -57,6 +59,21 @@ public class QuestListeners implements Listener {
 	{
 		Block b = e.getBlockPlaced();
 		b.setMetadata("PlacedBlock", new FixedMetadataValue(main, 1));
+	}
+	
+	@EventHandler
+	public void OnHit(EntityDamageByEntityEvent e)
+	{
+		Player p;
+		Arrow a;
+		
+		if (e.getDamager() instanceof Arrow) {
+			a = (Arrow)e.getDamager();
+			if (a.getShooter() instanceof Player) {
+				p = (Player)a.getShooter();
+				second.check_arrow_hit(p);
+			}
+		}
 	}
 	
 	@EventHandler
