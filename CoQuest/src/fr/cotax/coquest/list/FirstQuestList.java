@@ -97,8 +97,9 @@ public class FirstQuestList {
 		player.sendMessage("§7§l- §6 " + getQuestReward(id) + "\u2726");
 		player.sendMessage(QuestDescBorder(2));
 		player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 0.7f);
-		System.out.println("You completed quest n°" + id);
-		util.change_progress(player, id, progressNeeded(id) * -1);
+		int set_prog_zero = util.get_quest_progress(player, 1);
+		set_prog_zero *= -1;
+		util.change_progress(player, 1, set_prog_zero);
 		util.change_quest(player, 1, true);
 		util.add_points(player, reward);
 	}
