@@ -170,8 +170,6 @@ public class SqlQuestUtilities {
 		int new_prog = old_prog + prog_added;
 		String quest_str = "q" + q_id + "_progress";
 
-		System.out.println("Currently adding " + prog_added + " to progress");
-		System.out.println("So now the progress is " + new_prog + "Before it was " + old_prog);
 		try {
 			PreparedStatement q = connection.prepareStatement("UPDATE players SET " + quest_str + " = ? WHERE uuid = ?");
 			q.setInt(1, new_prog);

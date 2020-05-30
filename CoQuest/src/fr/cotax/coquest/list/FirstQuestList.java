@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerFishEvent;
 
 import fr.cotax.coquest.sql.SqlQuestUtilities;
 
@@ -15,7 +15,8 @@ public class FirstQuestList {
 
 	private SqlQuestUtilities util;
 	private List<EntityType> kill_list;
-	
+	private List<Material> break_list;
+
 	public String getQuestName(int index)
 	{
 		switch (index) {
@@ -83,6 +84,11 @@ public class FirstQuestList {
 		kill_list = new ArrayList<EntityType>();
 		kill_list.add(EntityType.ZOMBIE);
 		kill_list.add(EntityType.SKELETON);
+		
+		break_list = new ArrayList<Material>();
+		break_list.add(Material.STONE);
+		break_list.add(Material.COAL_ORE);
+		break_list.add(Material.OAK_LOG);
 	}
 	
 	public void CompleteQuest(Player player, int reward, int id)
@@ -111,6 +117,13 @@ public class FirstQuestList {
 		}
 	}
 
+	public void check_break(Player player, Material mat) {
+		int id = util.get_quest_id(player, 1);
+
+		if (!kill_list.contains(mat) || player == null || id == 0)
+			return;
+	}
+	
 	public void check_fishing(Player player) {
 		if (player == null)
 			return;
