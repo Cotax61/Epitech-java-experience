@@ -33,7 +33,7 @@ public class QuestCommand implements CommandExecutor {
 	public QuestCommand(SqlQuestUtilities util) {
 		this.util = util;
 		first = new FirstQuestList(util);
-//   	second = new SecondQuestList(util);
+      	second = new SecondQuestList(util);
 //		third = new ThirdQuestList(util);
 //		fourth = new FourthQuestList(util);
 //		fifth = new FifthQuestList(util);
