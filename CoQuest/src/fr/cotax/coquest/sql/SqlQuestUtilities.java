@@ -123,7 +123,7 @@ public class SqlQuestUtilities {
 	public boolean change_quest(Player player, int id, boolean set_to_zero)
 	{		
 		int old_id = get_quest_id(player, id);
-		int max_id_tab[] = {3, 1, 1, 1, 1};
+		int max_id_tab[] = {7, 1, 1, 1, 1};
 		Random rand = new Random();
 		System.out.println("The id you are searching for is : " + max_id_tab[id]);
 		int new_id = rand.nextInt(max_id_tab[id - 1]) + 1;

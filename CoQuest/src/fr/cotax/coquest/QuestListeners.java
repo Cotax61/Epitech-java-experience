@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -66,6 +67,17 @@ public class QuestListeners implements Listener {
 			first.check_fishing(player);
 		}
 			
+	}
+
+	@EventHandler
+	public void OnBreak(BlockBreakEvent e)
+	{
+		Block b = e.getBlock();
+		Player p = e.getPlayer();
+		
+		if (b.hasMetadata("PlacedBlock") || p == null)
+			return;
+		first.check_break(p, b.getType());
 	}
 	
 	@EventHandler
