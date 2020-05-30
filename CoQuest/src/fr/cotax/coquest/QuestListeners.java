@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerFishEvent;
@@ -88,6 +89,18 @@ public class QuestListeners implements Listener {
 	}
 
 	@EventHandler
+	public void OnDamage(EntityDamageEvent e)
+	{
+		if (e.getEntity() instanceof Player)
+		{
+			int dmg = (int)e.getDamage();
+			if (dmg == 0)
+				dmg = 1;
+			second.check_dmg_recieved((Player)e.getEntity(), dmg);
+		}
+	}
+	
+	@EventHandler
 	public void OnBreak(BlockBreakEvent e)
 	{
 		Block b = e.getBlock();
@@ -98,11 +111,14 @@ public class QuestListeners implements Listener {
 		first.check_break(p, b.getType());
 		second.check_break(p, b.getType());
 	}
+
 	
 	@EventHandler
 	public void onMobDeath(EntityDeathEvent e) {
 		first.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
 		second.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
+		if (e.getEntity() instanceof Player)
+			second.death_reset((Player)e.getEntity());
 	}
 	
 	@EventHandler

@@ -24,6 +24,7 @@ public class SecondQuestList {
 		case 2: return ("§c§lAu bûcher !");
 		case 3: return ("§c§lUn coprs d'acier.");
 		case 4: return ("§c§lEntrainement de précision.");
+		case 5: return ("§c§lUn challenge stupide.");
 		default: return ("§c§lUhm... there is no quest N°" + index);
 		}
 	}
@@ -47,6 +48,7 @@ public class SecondQuestList {
 		case 2: return (3);
 		case 3: return (24);
 		case 4: return (15);
+		case 5: return (100);
 		default: return (0);
 		}
 	}
@@ -66,7 +68,8 @@ public class SecondQuestList {
 		case 1: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aTuer " + progressNeeded(1) + " Creepers", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(1), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(1) + "\u2726"));
 		case 2: return (Arrays.asList(DifficultyStar(3), QuestDescBorder(1), "§aTuer " + progressNeeded(2) + " Sorcières", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(2), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(2) + "\u2726"));
 		case 3: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aDétruire " + progressNeeded(3) + " Minerais de fer", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(3), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(3) + "\u2726"));
-		case 4: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aToucher " + progressNeeded(4) + " Entités avec une flèche", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(4) + "\u2726"));
+		case 4: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aToucher " + progressNeeded(4) + " Montres avec une flèche", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(4) + "\u2726"));
+		case 5: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aTanker " + progressNeeded(5) + " Dégâts sans mourrir", "§r" + util.get_quest_progress(player, 2) + "/" + progressNeeded(5), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(5) + "\u2726"));
 		default: return null;
 		}
 	}
@@ -78,6 +81,7 @@ public class SecondQuestList {
 		case 2: return (23);
 		case 3: return (13);
 		case 4: return (9);
+		case 5: return (16);
 		default: return 0;
 		}
 	}
@@ -138,6 +142,27 @@ public class SecondQuestList {
 		check_quest_end(player, id);
 	}
 
+	public void death_reset(Player p)
+	{
+		int id = util.get_quest_id(p, 2);
+		
+		if (id != 5)
+			return;
+		int set_prog_zero = util.get_quest_progress(p, 2);
+		set_prog_zero *= -1;
+		util.change_progress(p, 2, set_prog_zero);		
+	}
+	
+	public void check_dmg_recieved(Player player, int damages)
+	{
+		int id = util.get_quest_id(player, 2);
+		
+		if (id != 5)
+			return;
+		util.change_progress(player, 2, damages);
+		check_quest_end(player, id);
+	}
+	
 	public void check_entity_kill(EntityType type, Player player)
 	{
 		int id = util.get_quest_id(player, 2);
