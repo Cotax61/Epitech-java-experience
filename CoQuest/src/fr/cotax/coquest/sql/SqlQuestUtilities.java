@@ -67,7 +67,7 @@ public class SqlQuestUtilities {
 		try {
 			PreparedStatement q = connection.prepareStatement("UPDATE players SET quest_points = ? WHERE uuid = ?");
 			q.setInt(1, new_points);
-			q.setString(1,  player.getUniqueId().toString());
+			q.setString(2,  player.getUniqueId().toString());
 			q.executeUpdate();
 			q.close();
 			return true;
@@ -117,8 +117,8 @@ public class SqlQuestUtilities {
 		return (0);
 	}
 	
-	public boolean change_quest(Player player, int id)
-	{
+	public boolean change_quest(Player player, int id, boolean set_to_zero)
+	{		
 		int old_id = get_quest_id(player, id);
 		int max_id_tab[] = {2, 1, 1, 1, 1};
 		Random rand = new Random();
@@ -129,6 +129,8 @@ public class SqlQuestUtilities {
 //		while (old_id == new_id)
 //			new_id = rand.nextInt(max_id_tab[id] - 1) + 1;
 		String quest_string = "quest_" + id + "_id";
+		if (set_to_zero == true)
+			new_id = 0;
 		try {
 			PreparedStatement q = connection.prepareStatement("UPDATE players SET " + quest_string + " = ? WHERE uuid = ?");
 			q.setInt(1, new_id);
@@ -168,6 +170,7 @@ public class SqlQuestUtilities {
 		int new_prog = old_prog + prog_added;
 		String quest_str = "q" + q_id + "_progress";
 
+		System.out.println("Currently adding " + prog_added + " to progress");
 		try {
 			PreparedStatement q = connection.prepareStatement("UPDATE players SET " + quest_str + " = ? WHERE uuid = ?");
 			q.setInt(1, new_prog);

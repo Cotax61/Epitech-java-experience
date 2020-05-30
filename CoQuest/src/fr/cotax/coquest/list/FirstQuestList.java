@@ -13,7 +13,7 @@ public class FirstQuestList {
 
 	private SqlQuestUtilities util;
 	private List<EntityType> kill_list;
-
+	
 	public String getQuestName(int index)
 	{
 		switch (index) {
@@ -32,6 +32,15 @@ public class FirstQuestList {
 		case 4: return ("§c\u272D\u272D\u272D\u272D§7\u272D");
 		case 5: return ("§4\u272D\u272D\u272D\u272D\u272D");
 		default: return (null);
+		}
+	}
+	
+	public int progressNeeded(int idx)
+	{
+		switch (idx) {
+		case 1: return (12);
+		case 2: return (10);
+		default: return (0);
 		}
 	}
 	
@@ -61,13 +70,28 @@ public class FirstQuestList {
 		kill_list.add(EntityType.SKELETON);
 	}
 	
+	@SuppressWarnings("deprecation")
+	public void CompleteQuest(Player player, int reward, int id)
+	{
+		String name = getQuestName(id);
+		player.sendTitle("§6" + name, "§eQuête complétée !");
+		util.change_quest(player, 1, true);
+		util.add_points(player, reward);
+		util.change_progress(player, id, progressNeeded(id) * -1);
+	}
+	
 	public void check_entity_kill(EntityType type, Player player)
 	{
-		if (!kill_list.contains(type) || player == null)
+		int id = util.get_quest_id(player, 1);
+
+		if (!kill_list.contains(type) || player == null || id == 0)
 			return;
-		if (type == EntityType.ZOMBIE && util.get_quest_id(player, 1) == 1)
+		if (type == EntityType.ZOMBIE && id == 1)
 			util.change_progress(player, 1, 1);
-		if (type == EntityType.SKELETON && util.get_quest_id(player, 1) == 2)
+		else if (type == EntityType.SKELETON && id == 2)
 			util.change_progress(player, 1, 1);
+		if (util.get_quest_progress(player, 1) >= progressNeeded(id)) {
+			CompleteQuest(player, getQuestReward(id), id);
+		}
 	}
 }
