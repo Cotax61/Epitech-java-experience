@@ -2,13 +2,14 @@ package fr.cotax.coquest;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
@@ -44,6 +45,17 @@ public class QuestListeners implements Listener {
 	}
 	
 	@EventHandler
+	public void onFish(PlayerFishEvent e) {
+		Player player = e.getPlayer();
+		Entity ent = e.getCaught();
+		
+		if (ent != null && player != null) {
+			first.check_fishing(player);
+		}
+			
+	}
+	
+	@EventHandler
 	public void onMobDeath(EntityDeathEvent e) {
 		first.check_entity_kill(e.getEntityType(), e.getEntity().getKiller());
 	}
@@ -51,7 +63,6 @@ public class QuestListeners implements Listener {
 	@EventHandler
 	public void onInvClick(InventoryClickEvent e) {
 		
-		Inventory inv = e.getInventory();
 		InventoryView view = e.getView();
 		Player player = (Player)e.getWhoClicked();
 		ItemStack current = e.getCurrentItem();

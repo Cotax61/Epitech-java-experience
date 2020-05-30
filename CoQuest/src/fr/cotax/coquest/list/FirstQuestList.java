@@ -7,6 +7,7 @@ import java.util.List;
 import org.bukkit.Sound;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerFishEvent;
 
 import fr.cotax.coquest.sql.SqlQuestUtilities;
 
@@ -20,6 +21,7 @@ public class FirstQuestList {
 		switch (index) {
 		case 1: return ("§c§lChasse aux zombies !");	
 		case 2: return ("§c§lChasse aux squelettes !");
+		case 3: return ("§c§lBesoins de poissons !");
 		default: return ("§c§lUhm... there is no quest N°" + index);
 		}
 	}
@@ -41,6 +43,7 @@ public class FirstQuestList {
 		switch (idx) {
 		case 1: return (12);
 		case 2: return (10);
+		case 3: return (5);
 		default: return (0);
 		}
 	}
@@ -59,6 +62,7 @@ public class FirstQuestList {
 		switch (index) {
 		case 1: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aTuer " + progressNeeded(1) + " Zombies", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(1), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(1) + "\u2726"));
 		case 2: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aTuer " + progressNeeded(2) + " Squelettes", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(2), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(2) + "\u2726"));
+		case 3: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aPêche " + progressNeeded(3) + " Objets", "§r" + util.get_quest_progress(player, 1) + "/" + progressNeeded(3), QuestDescBorder(2), "§dRécompense :", "§7§1- §6" + getQuestReward(3) + "\u2726"));
 		default: return null;
 		}
 	}
@@ -68,6 +72,7 @@ public class FirstQuestList {
 		switch (q_index) {
 		case 1: return (12);
 		case 2: return (14);
+		case 3: return (16);
 		default: return 0;
 		}
 	}
@@ -83,17 +88,36 @@ public class FirstQuestList {
 	public void CompleteQuest(Player player, int reward, int id)
 	{
 		String name = getQuestName(id);
-
-		player.sendMessage(QuestDescBorder(1));
+		
+		player.sendMessage(QuestDescBorder(2));
+		player.sendMessage(getQuestName(id));
 		player.sendMessage("§eQuête accomplie !");
 		player.sendMessage("");
 		player.sendMessage("§dRécompense: ");
-		player.sendMessage("§7§l- §6 " + getQuestReward(1) + "\u2726");
+		player.sendMessage("§7§l- §6 " + getQuestReward(id) + "\u2726");
 		player.sendMessage(QuestDescBorder(2));
 		player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 10, 0.7f);
+		System.out.println("You completed quest n°" + id);
+		util.change_progress(player, id, progressNeeded(id) * -1);
 		util.change_quest(player, 1, true);
 		util.add_points(player, reward);
-		util.change_progress(player, id, progressNeeded(id) * -1);
+	}
+	
+	public void check_quest_end(Player player, int id)
+	{
+		if (util.get_quest_progress(player, 1) >= progressNeeded(id)) {
+			CompleteQuest(player, getQuestReward(id), id);
+		}
+	}
+
+	public void check_fishing(Player player) {
+		if (player == null)
+			return;
+
+		int id = util.get_quest_id(player, 1);
+		if (id == 3)
+			util.change_progress(player, 1, 1);
+		check_quest_end(player, id);
 	}
 	
 	public void check_entity_kill(EntityType type, Player player)
@@ -106,8 +130,6 @@ public class FirstQuestList {
 			util.change_progress(player, 1, 1);
 		else if (type == EntityType.SKELETON && id == 2)
 			util.change_progress(player, 1, 1);
-		if (util.get_quest_progress(player, 1) >= progressNeeded(id)) {
-			CompleteQuest(player, getQuestReward(id), id);
-		}
+		check_quest_end(player, id);
 	}
 }
