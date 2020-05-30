@@ -58,8 +58,10 @@ public class QuestListeners implements Listener {
 		if (current == null) return;
 		
 		if (view.getTitle().equalsIgnoreCase("§7Tâches à réaliser")) {
+			e.setCancelled(true);
 			if (current.getType() == Material.PAPER && sql_util.get_quest_id(player, e.getSlot() + 1) == 0) {
 				sql_util.change_quest(player, e.getSlot() + 1, false);
+				view.close();
 			}
 		}
 	}
