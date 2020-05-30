@@ -1,5 +1,8 @@
 package fr.cotax.coquest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -20,7 +23,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.plugin.Plugin;
 
 import fr.cotax.coquest.list.FifthQuestList;
 import fr.cotax.coquest.list.FirstQuestList;
@@ -38,6 +40,7 @@ public class QuestListeners implements Listener {
 	private ThirdQuestList third;
 	private FourthQuestList fourth;
 	private FifthQuestList fifth;
+	private List<Material> valid_material_list;
 	
 	public QuestListeners(main main, SqlQuestUtilities tools)
 	{
@@ -48,6 +51,10 @@ public class QuestListeners implements Listener {
 		third = new ThirdQuestList(sql_util);
 		fourth = new FourthQuestList(sql_util);
 		fifth = new FifthQuestList(sql_util);
+		valid_material_list = new ArrayList<Material>();
+		valid_material_list.add(Material.PAPER);
+		valid_material_list.add(Material.BOOK);
+		valid_material_list.add(Material.BOOKSHELF);
 	}
 	
 	@EventHandler
@@ -147,7 +154,7 @@ public class QuestListeners implements Listener {
 		
 		if (view.getTitle().equalsIgnoreCase("§7Tâches à réaliser")) {
 			e.setCancelled(true);
-			if (current.getType() == Material.PAPER && sql_util.get_quest_id(player, e.getSlot() + 1) == 0) {
+			if (valid_material_list.contains(current.getType()) && sql_util.get_quest_id(player, e.getSlot() + 1) == 0) {
 				sql_util.change_quest(player, e.getSlot() + 1, false);
 				view.close();
 				Bukkit.getServer().dispatchCommand(player, "quest");
