@@ -41,4 +41,40 @@ public class SqlSkillsUtilities {
 		}
 		return false;
 	}
+	
+	public int get_skill_level(Player player, String skill)
+	{
+		try {
+			PreparedStatement q = connection.prepareStatement("SELECT " + skill + " FROM levels WHERE uuid = ?");
+			q.setString(1,  player.getUniqueId().toString());
+			int level = 0;
+			ResultSet rs = q.executeQuery();
+			while (rs.next()) {
+				level = rs.getInt(skill);
+			}
+			q.close();
+			return (level);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return (0);
+	}
+
+	public int get_skill_xp(Player player, String skill)
+	{
+		try {
+			PreparedStatement q = connection.prepareStatement("SELECT " + skill + " FROM xp WHERE uuid = ?");
+			q.setString(1,  player.getUniqueId().toString());
+			int xp = 0;
+			ResultSet rs = q.executeQuery();
+			while (rs.next()) {
+				xp = rs.getInt(skill);
+			}
+			q.close();
+			return (xp);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return (0);
+	}	
 }
