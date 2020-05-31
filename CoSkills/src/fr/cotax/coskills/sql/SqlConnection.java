@@ -21,7 +21,6 @@ public class SqlConnection {
 		if (!isConnected()) {
 			try {
 				connection = DriverManager.getConnection(url + host + "/" + database, user, pass);
-				System.out.println("Connection to SQL database succeed");
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
