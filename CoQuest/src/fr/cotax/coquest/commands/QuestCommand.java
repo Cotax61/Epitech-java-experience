@@ -103,6 +103,17 @@ public class QuestCommand implements CommandExecutor {
 		item.setItemMeta(meta);
 		return (item);
 	}
+
+	public ItemStack CreateShopItem(Player player)
+	{
+		ItemStack shop = new ItemStack(Material.CHEST);
+		ItemMeta meta = shop.getItemMeta();
+		
+		meta.setDisplayName("§6§l§nBoutique de quête");
+		meta.setLore(Arrays.asList("", "§eEchangez vos §6\u2726 §econtre", "§eDes objets unique !", "", "§eVous possédez : " + util.get_points(player) + "§6\u2726"));
+		shop.setItemMeta(meta);
+		return (shop);
+	}
 	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
@@ -119,7 +130,7 @@ public class QuestCommand implements CommandExecutor {
 			menu.setItem(5, CreateEmptyItem(Material.GRAY_STAINED_GLASS_PANE));
 			menu.setItem(6, CreateEmptyItem(Material.GRAY_STAINED_GLASS_PANE));
 			menu.setItem(7, CreateEmptyItem(Material.IRON_BARS));
-			menu.setItem(8, CreateEmptyItem(Material.CHEST));
+			menu.setItem(8, CreateShopItem(player));
 			player.openInventory(menu);
 		}
 		return false;

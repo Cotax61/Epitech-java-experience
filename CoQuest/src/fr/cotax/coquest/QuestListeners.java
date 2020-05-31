@@ -29,6 +29,7 @@ import fr.cotax.coquest.list.FirstQuestList;
 import fr.cotax.coquest.list.FourthQuestList;
 import fr.cotax.coquest.list.SecondQuestList;
 import fr.cotax.coquest.list.ThirdQuestList;
+import fr.cotax.coquest.shop.ShopFrontPage;
 import fr.cotax.coquest.sql.SqlQuestUtilities;
 
 public class QuestListeners implements Listener {
@@ -40,6 +41,7 @@ public class QuestListeners implements Listener {
 	private ThirdQuestList third;
 	private FourthQuestList fourth;
 	private FifthQuestList fifth;
+	private ShopFrontPage shop;
 	private List<Material> valid_material_list;
 	
 	public QuestListeners(main main, SqlQuestUtilities tools)
@@ -51,6 +53,7 @@ public class QuestListeners implements Listener {
 		third = new ThirdQuestList(sql_util);
 		fourth = new FourthQuestList(sql_util);
 		fifth = new FifthQuestList(sql_util);
+		shop = new ShopFrontPage(sql_util);
 		valid_material_list = new ArrayList<Material>();
 		valid_material_list.add(Material.PAPER);
 		valid_material_list.add(Material.BOOK);
@@ -131,6 +134,7 @@ public class QuestListeners implements Listener {
 		second.check_break(p, b.getType());
 		third.check_break(p, b.getType());
 		fourth.check_break(p, b.getType());
+		fifth.check_break(p, b.getType());
 	}
 
 	@EventHandler
@@ -154,6 +158,8 @@ public class QuestListeners implements Listener {
 		
 		if (view.getTitle().equalsIgnoreCase("§7Tâches à réaliser")) {
 			e.setCancelled(true);
+			if (current.getType() == Material.CHEST)
+				shop.OpenShop(player);
 			if (valid_material_list.contains(current.getType()) && sql_util.get_quest_id(player, e.getSlot() + 1) == 0) {
 				sql_util.change_quest(player, e.getSlot() + 1, false);
 				view.close();

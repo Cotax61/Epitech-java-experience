@@ -19,7 +19,12 @@ public class FifthQuestList {
 	public String getQuestName(int index)
 	{
 		switch (index) {
-		case 1: return ("§c§lBunker mobile");
+		case 1: return ("§c§lBunker mobile.");
+		case 2: return ("§c§lUsine a charbon.");
+		case 3: return ("§c§lTitan de fer.");
+		case 4: return ("§c§lOncle piqueur de sous.");
+		case 5: return ("§c§lMining diamonds !");
+		case 6: return ("§c§lLe temps c'est de l'argent !");
 		default: return ("§c§lUhm... there is no quest N°" + index);
 		}
 	}
@@ -40,6 +45,11 @@ public class FifthQuestList {
 	{
 		switch (idx) {
 		case 1: return (1500);
+		case 2: return (2500);
+		case 3: return (1750);
+		case 4: return (1000);
+		case 5: return (350);
+		case 6: return (75);
 		default: return (0);
 		}
 	}
@@ -57,11 +67,11 @@ public class FifthQuestList {
 	{
 		switch (index) {
 		case 1: return (Arrays.asList(DifficultyStar(5), QuestDescBorder(1), "§aTanker " + progressNeeded(1) + " Dégâts sans mourrir", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(1), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(1) + "\u2726"));
-		case 2: return (Arrays.asList(DifficultyStar(3), QuestDescBorder(1), "§aTuer " + progressNeeded(2) + " Sorcières", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(2), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(2) + "\u2726"));
-		case 3: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aDétruire " + progressNeeded(3) + " Minerais de fer", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(3), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(3) + "\u2726"));
-		case 4: return (Arrays.asList(DifficultyStar(1), QuestDescBorder(1), "§aToucher " + progressNeeded(4) + " Montres avec une flèche", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(4) + "\u2726"));
-		case 5: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aTanker " + progressNeeded(5) + " Dégâts sans mourrir", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(5), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(5) + "\u2726"));
-		case 6: return (Arrays.asList(DifficultyStar(2), QuestDescBorder(1), "§aDétruire " + progressNeeded(6) + " Minerais de Redstone", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(6), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(6) + "\u2726"));
+		case 2: return (Arrays.asList(DifficultyStar(5), QuestDescBorder(1), "§aDétruire " + progressNeeded(2) + " Minerais de charbon", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(2), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(2) + "\u2726"));
+		case 3: return (Arrays.asList(DifficultyStar(5), QuestDescBorder(1), "§aDétruire " + progressNeeded(3) + " Minerais de fer", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(3), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(3) + "\u2726"));
+		case 4: return (Arrays.asList(DifficultyStar(5), QuestDescBorder(1), "§aDétruire " + progressNeeded(4) + " Minerais d'or", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(4), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(4) + "\u2726"));
+		case 5: return (Arrays.asList(DifficultyStar(5), QuestDescBorder(1), "§aDétruire " + progressNeeded(5) + " Minerais de diamant", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(5), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(5) + "\u2726"));
+		case 6: return (Arrays.asList(DifficultyStar(5), QuestDescBorder(1), "§aDétruire " + progressNeeded(6) + " Minerais d'émeraude", "§r" + util.get_quest_progress(player, 5) + "/" + progressNeeded(6), QuestDescBorder(2), "§dRécompense :", "§7§l- §6" + getQuestReward(6) + "\u2726"));
 		default: return null;
 		}
 	}
@@ -70,6 +80,11 @@ public class FifthQuestList {
 	{
 		switch (q_index) {
 		case 1: return (250);
+		case 2: return (175);
+		case 3: return (183);
+		case 4: return (190);
+		case 5: return (280);
+		case 6: return (267);
 		default: return 0;
 		}
 	}
@@ -80,6 +95,11 @@ public class FifthQuestList {
 		kill_list = new ArrayList<EntityType>();
 
 		break_list = new ArrayList<Material>();
+		break_list.add(Material.COAL_ORE);
+		break_list.add(Material.IRON_ORE);
+		break_list.add(Material.GOLD_ORE);
+		break_list.add(Material.DIAMOND_ORE);
+		break_list.add(Material.EMERALD_ORE);
 	}
 	
 	public void CompleteQuest(Player player, int reward, int id)
@@ -111,9 +131,15 @@ public class FifthQuestList {
 		int id = util.get_quest_id(player, 5);
 			if (!break_list.contains(mat) || player == null || id == 0)
 			return;
-		if (mat == Material.IRON_ORE && id == 3)
+		if (mat == Material.COAL_ORE && id == 2)
 			util.change_progress(player, 5, 1);
-		else if (mat == Material.REDSTONE_ORE && id == 6)
+		else if (mat == Material.IRON_ORE && id == 3)
+			util.change_progress(player, 5, 1);
+		else if (mat == Material.GOLD_ORE && id == 4)
+			util.change_progress(player, 5, 1);
+		else if (mat == Material.DIAMOND_ORE && id == 5)
+			util.change_progress(player, 5, 1);
+		else if (mat == Material.EMERALD_ORE && id == 6)
 			util.change_progress(player, 5, 1);
 		check_quest_end(player, id);
 	}
